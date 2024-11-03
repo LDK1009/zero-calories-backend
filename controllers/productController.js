@@ -1,6 +1,7 @@
 const { Product, Nutritional } = require("../models");
 
 //////////////////////////////////////////////////GET//////////////////////////////////////////////////
+
 // 모든 상품 가져오기
 const getAllProducts = async (req, res, next) => {
   try {
@@ -70,18 +71,29 @@ const getAllLowSugarProducts = async (req, res, next) => {
 //////////////////////////////////////////////////POST//////////////////////////////////////////////////
 // 상품 추가하기
 const addProduct = async (req, res, next) => {
+  console.log("데이터 추가");
   try {
-    const { name, link, src, major_category, middle_category } = req.body; // 클라이언트에서 받은 상품 데이터
+    const { name, link, src, major_category, middle_category } = req.body; // 상품 정보
+    const { carbohydrate, protein, fat } = req.body; // 상품 영양소 정보
 
     // 새 상품을 생성하고 데이터베이스에 저장
     const newProduct = await Product.create({
       name,
-      price,
+      link,
+      src,
       major_category,
-      description,
+      middle_category,
     });
 
-    res.status(201).json(newProduct); // 생성된 상품 정보를 응답으로 반환
+    // 생성된 Product의 id를 사용하여 Nutritional 생성
+    const newNutritional = await Nutritional.create({
+      productId: newProduct.id, // 외래키로 Product의 id 사용
+      carbohydrate,
+      protein,
+      fat,
+    });
+
+    res.status(201).json({ product: newProduct, nutritional: newNutritional });
   } catch (error) {
     next(error); // 에러 발생 시 다음 미들웨어로 전파
   }

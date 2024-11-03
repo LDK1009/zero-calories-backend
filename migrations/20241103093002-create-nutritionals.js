@@ -1,21 +1,16 @@
 "use strict";
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable("nutritionals", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
-      },
-      productId: {
-        type: Sequelize.INTEGER,
         references: {
           model: "products", // 참조할 테이블 이름
           key: "id",
         },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
+        autoIncrement: true,
         allowNull: false,
       },
       carbohydrate: {
@@ -49,7 +44,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("nutritionals");
   },
 };

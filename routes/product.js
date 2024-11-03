@@ -11,5 +11,6 @@ const {
 
 // Get all users
 router.get("/", getAllProducts);
+router.post("/", addProduct);
 
 module.exports = router;

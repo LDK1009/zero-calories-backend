@@ -4,8 +4,16 @@ const dotenv = require("dotenv");
 dotenv.config(); // .env 파일의 환경 변수를 불러와 process.env로 사용할 수 있게 설정
 const routes = require("./routes"); // 라우팅 index.js
 const errorHandler = require("./middlewares/errorHandler"); // 에러 핸들링 미들웨어
+const cors = require("cors");
+
 
 const app = express(); // Express 앱 인스턴스 생성
+
+// 모든 출처에서의 요청 허용
+app.use(cors());
+
+// 특정 출처만 허용
+// app.use(cors({ origin: "http://localhost:3000" }));
 
 // json 데이터를 파싱할 수 있도록 설정 (요청 본문에서 JSON 데이터를 다룰 수 있음)
 app.use(express.json());

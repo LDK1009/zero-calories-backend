@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Nutritional belongs to Product with foreignKey 'productId'
       Nutritional.belongsTo(models.Product, {
-        foreignKey: "productId",
+        foreignKey: "id",
         as: "Product",
       });
     }
@@ -18,15 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-      },
-      productId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "products",
-          key: "id",
-        },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
       },
       carbohydrate: {
         type: DataTypes.INTEGER,
