@@ -42,6 +42,21 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
+      price:{
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+      },
+      piece:{
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+      },
+      price_per_piece:{
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+      },
     },
     {
       sequelize,

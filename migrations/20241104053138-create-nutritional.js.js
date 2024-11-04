@@ -1,50 +1,58 @@
 "use strict";
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("nutritionals", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        references: {
-          model: "products", // 참조할 테이블 이름
-          key: "id",
-        },
         autoIncrement: true,
         allowNull: false,
       },
+      calories: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
       carbohydrate: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
         allowNull: false,
+        defaultValue: 0,
       },
       protein: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
         allowNull: false,
+        defaultValue: 0,
       },
       fat: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
         allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
       },
-    }, {
-      charset: "utf8mb4",
-      collate: "utf8mb4_unicode_ci",
+      productId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "products", // 테이블 이름이 products로 가정
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("nutritionals");
   },
 };

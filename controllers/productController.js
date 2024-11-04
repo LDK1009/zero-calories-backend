@@ -9,11 +9,13 @@ const getAllProducts = async (req, res, next) => {
       include: [
         {
           model: Nutritional,
-          as: "Nutritional", // 관계 설정의 as와 일치해야 함
+          as: "Nutritional",
         },
       ],
+      raw: true, // 평면 객체로 반환
+      nest: true, // as 옵션으로 설정된 네임스페이스를 접두사로 구분
     });
-    res.status(200).json(products);
+    
     res.status(200).json(products);
   } catch (error) {
     next(error); // 에러를 다음 미들웨어(에러 핸들러)로 전파
@@ -73,8 +75,8 @@ const getAllLowSugarProducts = async (req, res, next) => {
 const addProduct = async (req, res, next) => {
   console.log("데이터 추가");
   try {
-    const { name, link, src, major_category, middle_category } = req.body; // 상품 정보
-    const { carbohydrate, protein, fat } = req.body; // 상품 영양소 정보
+    const { name, link, src, major_category, middle_category, price, piece, price_per_piece } = req.body; // 상품 정보
+    const { calories, carbohydrate, protein, fat } = req.body; // 상품 영양소 정보
 
     // 새 상품을 생성하고 데이터베이스에 저장
     const newProduct = await Product.create({
@@ -83,11 +85,15 @@ const addProduct = async (req, res, next) => {
       src,
       major_category,
       middle_category,
+      price,
+      piece,
+      price_per_piece,
     });
 
     // 생성된 Product의 id를 사용하여 Nutritional 생성
     const newNutritional = await Nutritional.create({
       productId: newProduct.id, // 외래키로 Product의 id 사용
+      calories,
       carbohydrate,
       protein,
       fat,

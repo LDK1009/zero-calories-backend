@@ -24,6 +24,21 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
+      price:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+      },
+      piece:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+      },
+      price_per_piece:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+      },
       middle_category: {
         type: Sequelize.STRING(100),
         allowNull: false,

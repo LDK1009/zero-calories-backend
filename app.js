@@ -29,7 +29,7 @@ const PORT = process.env.PORT || 3000;
 
 // 데이터베이스 연결 및 서버 시작
 sequelize
-  .sync({force: true}) // Sequelize 모델을 데이터베이스와 동기화
+  .sync() // Sequelize 모델을 데이터베이스와 동기화
   .then(() => {
     console.log("Database connected!"); // 데이터베이스 연결 성공 시 로그 출력
     app.listen(PORT, () => {

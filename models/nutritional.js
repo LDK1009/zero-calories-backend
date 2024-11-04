@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      calories: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
       carbohydrate: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
