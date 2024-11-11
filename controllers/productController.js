@@ -26,7 +26,7 @@ const getAllProducts = async (req, res, next) => {
 const getAllZeroCalorieProducts = async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      where: { major_category: "zeroCalorie" },
+      where: { major_category: "제로칼로리" },
     });
     res.status(200).json(products);
   } catch (error) {
@@ -38,7 +38,7 @@ const getAllZeroCalorieProducts = async (req, res, next) => {
 const getAllZeroSugarProducts = async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      where: { major_category: "zeroSugar" },
+      where: { major_category: "제로슈가" },
     });
     res.status(200).json(products);
   } catch (error) {
@@ -50,7 +50,7 @@ const getAllZeroSugarProducts = async (req, res, next) => {
 const getAllLowCalorieProducts = async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      where: { major_category: "lowCalorie" },
+      where: { major_category: "로우칼로리" },
     });
     res.status(200).json(products);
   } catch (error) {
@@ -62,7 +62,7 @@ const getAllLowCalorieProducts = async (req, res, next) => {
 const getAllLowSugarProducts = async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      where: { major_category: "lowSugar" },
+      where: { major_category: "로우슈가" },
     });
     res.status(200).json(products);
   } catch (error) {
